@@ -14,8 +14,6 @@ const RequireClientOnboarding = lazy(() => import('@/layouts/RequireClientOnboar
 const RequireCoachAuth = lazy(() => import('@/layouts/RequireCoachAuth').then((m) => ({ default: m.RequireCoachAuth })));
 const RequireRoleAuth = lazy(() => import('@/layouts/RequireRoleAuth').then((m) => ({ default: m.RequireRoleAuth })));
 
-const RoleLoginPage = lazy(() => import('@/features/shared/RoleLoginPage').then((m) => ({ default: m.RoleLoginPage })));
-const CoachLoginPage = lazy(() => import('@/features/coach/auth/CoachLoginPage').then((m) => ({ default: m.CoachLoginPage })));
 const CoachRegisterPage = lazy(() => import('@/features/coach/auth/CoachRegisterPage').then((m) => ({ default: m.CoachRegisterPage })));
 const CoachOnboardingPendingPage = lazy(() => import('@/features/coach/auth/CoachOnboardingPendingPage').then((m) => ({ default: m.CoachOnboardingPendingPage })));
 
@@ -38,9 +36,12 @@ const CoachSessionDetailPage = lazy(() => CoachPages().then((m) => ({ default: m
 const SoloCoachProgramBuilder = lazy(() => import('@/features/coach/programs/SoloCoachProgramBuilder').then((m) => ({ default: m.SoloCoachProgramBuilder })));
 const GymAdminProgramBuilder = lazy(() => import('@/features/gym/admin/GymAdminProgramBuilder').then((m) => ({ default: m.GymAdminProgramBuilder })));
 
-const SplashPage = lazy(() => import('@/features/shared/SplashPage').then((m) => ({ default: m.SplashPage })));
+const LoginPage = lazy(() => import('@/features/shared/LoginPage').then((m) => ({ default: m.LoginPage })));
+const RegisterPathPage = lazy(() => import('@/features/shared/RegisterPathPage').then((m) => ({ default: m.RegisterPathPage })));
 const ForgotPasswordPage = lazy(() => import('@/features/shared/AuthFlowPages').then((m) => ({ default: m.ForgotPasswordPage })));
 const EmailVerificationPage = lazy(() => import('@/features/shared/AuthFlowPages').then((m) => ({ default: m.EmailVerificationPage })));
+const GymRegisterPage = lazy(() => import('@/features/gym/auth/GymRegisterPage').then((m) => ({ default: m.GymRegisterPage })));
+const GymRegisterPendingPage = lazy(() => import('@/features/gym/auth/GymRegisterPendingPage').then((m) => ({ default: m.GymRegisterPendingPage })));
 
 const ClientPages = () => import('@/features/client/ClientPages');
 const ClientRegisterPage = lazy(() => ClientPages().then((m) => ({ default: m.ClientRegisterPage })));
@@ -106,13 +107,16 @@ export function AppRoutes() {
   return (
     <Suspense fallback={<RouteFallback />}>
       <Routes>
-        <Route path="/" element={<SplashPage />} />
-        <Route path="/welcome" element={<SplashPage />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route path="/register" element={<RegisterPathPage />} />
+        <Route path="/gym/register" element={<GymRegisterPage />} />
+        <Route path="/gym/register/pending" element={<GymRegisterPendingPage />} />
 
         {/* Legacy coach URLs → solo-coach */}
         <Route path="/coach/*" element={<LegacyCoachRedirect />} />
 
-        <Route path="/solo-coach/login" element={<CoachLoginPage />} />
         <Route path="/solo-coach/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/solo-coach/verify-email" element={<EmailVerificationPage />} />
         <Route path="/solo-coach/register" element={<CoachRegisterPage />} />
@@ -140,7 +144,6 @@ export function AppRoutes() {
           </Route>
         </Route>
 
-        <Route path="/client/login" element={<RoleLoginPage role="client" dashboardPath="/client/dashboard" registerPath="/client/register" />} />
         <Route path="/client/register" element={<ClientRegisterPage />} />
 
         <Route element={<RequireRoleAuth role="client" />}>
@@ -163,8 +166,6 @@ export function AppRoutes() {
           </Route>
         </Route>
 
-        <Route path="/operator/login" element={<RoleLoginPage role="operator" dashboardPath="/operator/dashboard" />} />
-
         <Route element={<RequireRoleAuth role="operator" />}>
           <Route path="/operator" element={<OperatorLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
@@ -181,8 +182,6 @@ export function AppRoutes() {
             <Route path="registries/solo-coaches" element={<OperatorSoloCoachesRegistryPage />} />
           </Route>
         </Route>
-
-        <Route path="/gym/admin/login" element={<RoleLoginPage role="gym_admin" dashboardPath="/gym/admin/dashboard" />} />
 
         <Route element={<RequireRoleAuth role="gym_admin" />}>
           <Route path="/gym/admin" element={<GymAdminLayout />}>
@@ -203,8 +202,6 @@ export function AppRoutes() {
           </Route>
         </Route>
 
-        <Route path="/gym/coach/login" element={<RoleLoginPage role="gym_coach" dashboardPath="/gym/coach/dashboard" />} />
-
         <Route element={<RequireRoleAuth role="gym_coach" />}>
           <Route path="/gym/coach" element={<GymCoachLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
@@ -224,8 +221,6 @@ export function AppRoutes() {
           </Route>
         </Route>
 
-        <Route path="/gym/staff/login" element={<RoleLoginPage role="gym_staff" dashboardPath="/gym/staff/today" />} />
-
         <Route element={<RequireRoleAuth role="gym_staff" />}>
           <Route path="/gym/staff" element={<GymStaffLayout />}>
             <Route index element={<Navigate to="today" replace />} />
@@ -236,8 +231,6 @@ export function AppRoutes() {
             <Route path="help" element={<GymStaffHelpPage />} />
           </Route>
         </Route>
-
-        <Route path="/superadmin/login" element={<RoleLoginPage role="superadmin" dashboardPath="/superadmin/dashboard" />} />
 
         <Route element={<RequireRoleAuth role="superadmin" />}>
           <Route path="/superadmin" element={<SuperAdminLayout />}>

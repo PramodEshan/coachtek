@@ -21,13 +21,13 @@ export const ROLE_PATHS: Record<RoleKey, string> = {
 };
 
 export const ROLE_LOGIN_PATHS: Record<RoleKey, string> = {
-  solo_coach: '/solo-coach/login',
-  gym_coach: '/gym/coach/login',
-  client: '/client/login',
-  gym_admin: '/gym/admin/login',
-  gym_staff: '/gym/staff/login',
-  operator: '/operator/login',
-  superadmin: '/superadmin/login',
+  solo_coach: '/login',
+  gym_coach: '/login',
+  client: '/login',
+  gym_admin: '/login',
+  gym_staff: '/login',
+  operator: '/login',
+  superadmin: '/login',
 };
 
 /** Demo credentials used when switching consoles from the role switcher. */

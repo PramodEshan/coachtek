@@ -2,9 +2,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { Panel } from '@/components/ui';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/context/AuthContext';
+import { AuthShell } from '@/features/shared/AuthShell';
 
 const schema = z
   .object({
@@ -32,61 +31,62 @@ export function CoachRegisterPage() {
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   return (
-      <div className="ct-auth-layout">
-      <div className="ct-auth-theme-corner">
-        <ThemeToggle variant="compact" />
-      </div>
-      <Panel className="ct-auth-card">
-        <div className="ct-panel-body">
-          <h1>Coach registration</h1>
-          <p style={{ color: 'var(--ct-text-muted)', marginBottom: 24 }}>
-            Submit your profile for review before accessing the console.
-          </p>
-          <form
-            onSubmit={handleSubmit(async (values) => {
-              try {
-                await registerCoach(values);
-                navigate('/solo-coach/verify-email');
-              } catch (e) {
-                setError('root', { message: e instanceof Error ? e.message : 'Registration failed' });
-              }
-            })}
-            style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
-          >
-            <div className="ct-field">
-              <label htmlFor="name">Full name</label>
-              <input id="name" {...register('name')} />
-              {errors.name ? <span className="ct-field-error">{errors.name.message}</span> : null}
-            </div>
-            <div className="ct-field">
-              <label htmlFor="email">Email</label>
-              <input id="email" type="email" {...register('email')} />
-              {errors.email ? <span className="ct-field-error">{errors.email.message}</span> : null}
-            </div>
-            <div className="ct-field">
-              <label htmlFor="specialty">Specialty (optional)</label>
-              <input id="specialty" {...register('specialty')} />
-            </div>
-            <div className="ct-field">
-              <label htmlFor="password">Password</label>
-              <input id="password" type="password" {...register('password')} />
-              {errors.password ? <span className="ct-field-error">{errors.password.message}</span> : null}
-            </div>
-            <div className="ct-field">
-              <label htmlFor="confirmPassword">Confirm password</label>
-              <input id="confirmPassword" type="password" {...register('confirmPassword')} />
-              {errors.confirmPassword ? <span className="ct-field-error">{errors.confirmPassword.message}</span> : null}
-            </div>
-            {errors.root ? <span className="ct-field-error">{errors.root.message}</span> : null}
-            <button className="ct-btn-primary ct-btn-primary-lg ct-press" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting…' : 'Submit for review'}
-            </button>
-          </form>
-          <p style={{ marginTop: 20, color: 'var(--ct-text-muted)' }}>
-            Already registered? <Link to="/solo-coach/login" style={{ color: 'var(--ct-accent)', fontWeight: 600 }}>Sign in</Link>
-          </p>
+    <AuthShell
+      heroTitle={<>Build, scale, and <span className="neon">dominate.</span></>}
+      heroSubtitle="Centralize your coaching business — manage clients, programs, subscriptions, and performance tracking from one platform designed for growth."
+      heroFeatures={['Client management', 'Program builder', 'Performance analytics', 'Subscription billing']}
+      footerText="Already have an account?"
+      footerLinkText="Click here to sign in"
+      footerLinkTo="/login"
+    >
+      <div className="ct-auth-badge">Coach registration</div>
+      <h2>Create your account</h2>
+
+      <form
+        onSubmit={handleSubmit(async (values) => {
+          try {
+            await registerCoach(values);
+            navigate('/solo-coach/verify-email');
+          } catch (e) {
+            setError('root', { message: e instanceof Error ? e.message : 'Registration failed' });
+          }
+        })}
+        style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+      >
+        <div className="ct-field">
+          <label htmlFor="name">Full name</label>
+          <input id="name" placeholder="Enter your full name" {...register('name')} />
+          {errors.name && <span className="ct-field-error">{errors.name.message}</span>}
         </div>
-      </Panel>
-    </div>
+        <div className="ct-field">
+          <label htmlFor="email">Email address</label>
+          <input id="email" type="email" placeholder="coach@example.com" {...register('email')} />
+          {errors.email && <span className="ct-field-error">{errors.email.message}</span>}
+        </div>
+        <div className="ct-field">
+          <label htmlFor="specialty">Specialty (optional)</label>
+          <input id="specialty" placeholder="e.g. Strength & Conditioning" {...register('specialty')} />
+        </div>
+        <div className="ct-field">
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" {...register('password')} />
+          {errors.password && <span className="ct-field-error">{errors.password.message}</span>}
+        </div>
+        <div className="ct-field">
+          <label htmlFor="confirmPassword">Confirm password</label>
+          <input id="confirmPassword" type="password" {...register('confirmPassword')} />
+          {errors.confirmPassword && <span className="ct-field-error">{errors.confirmPassword.message}</span>}
+        </div>
+        {errors.root && <span className="ct-field-error">{errors.root.message}</span>}
+        <button className="ct-auth-cta ct-press" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting…' : 'Continue →'}
+        </button>
+      </form>
+
+      <p style={{ marginTop: 16, fontSize: 13, color: 'var(--ct-text-muted)' }}>
+        Looking to register a gym instead?{' '}
+        <Link to="/gym/register" style={{ color: 'var(--ct-neon-dark)', fontWeight: 600, textDecoration: 'none' }}>Register GYM</Link>
+      </p>
+    </AuthShell>
   );
 }

@@ -19,7 +19,7 @@ export function CoachOnboardingPendingPage() {
             <li>You will receive an email when approved or if more info is needed</li>
             <li>You cannot access the coach console until approval</li>
           </ul>
-          <Link className="ct-btn-secondary ct-press" to="/solo-coach/login">
+          <Link className="ct-btn-secondary ct-press" to="/login">
             Back to sign in
           </Link>
         </div>

@@ -59,7 +59,7 @@ export const SOLO_COACH_CONSOLE: CoachConsoleConfig = {
   variant: 'solo',
   basePath: '/solo-coach',
   loadingKey: 'coach-main',
-  loginPath: '/solo-coach/login',
+  loginPath: '/login',
   brandSubtitle: 'Solo coach',
   immersivePathPatterns: [/\/programs\/(new|[^/]+\/edit)$/],
   features: { calendar: true, payouts: true, payroll: false, programLibrary: true },
@@ -122,7 +122,7 @@ export const GYM_COACH_CONSOLE: CoachConsoleConfig = {
   variant: 'gym',
   basePath: '/gym/coach',
   loadingKey: 'gym-coach-main',
-  loginPath: '/gym/coach/login',
+  loginPath: '/login',
   brandSubtitle: 'Gym coach',
   features: { calendar: false, payouts: false, payroll: true, programLibrary: false },
   navSections: [

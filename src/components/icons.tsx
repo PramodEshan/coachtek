@@ -228,6 +228,28 @@ export function IconMoon(props: IconProps) {
   );
 }
 
+export function IconDumbbell(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M6.5 6.5a2 2 0 0 0-3 0v11a2 2 0 0 0 3 0" />
+      <path d="M17.5 6.5a2 2 0 0 1 3 0v11a2 2 0 0 1-3 0" />
+      <path d="M6.5 12h11" />
+      <path d="M4 9v6M20 9v6" />
+    </Icon>
+  );
+}
+
+export function IconBarChart(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M4 20h16" />
+      <rect x="5" y="10" width="3" height="10" rx="1" />
+      <rect x="10.5" y="5" width="3" height="15" rx="1" />
+      <rect x="16" y="8" width="3" height="12" rx="1" />
+    </Icon>
+  );
+}
+
 export function IconMore(props: IconProps) {
   return (
     <Icon {...props}>

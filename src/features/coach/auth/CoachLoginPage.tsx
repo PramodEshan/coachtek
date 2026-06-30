@@ -2,9 +2,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { Panel } from '@/components/ui';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { useAuth } from '@/context/AuthContext';
+import { AuthShell } from '@/features/shared/AuthShell';
 
 const schema = z.object({
   email: z.string().email('Enter a valid email'),
@@ -27,58 +26,54 @@ export function CoachLoginPage() {
   });
 
   return (
-      <div className="ct-auth-layout">
-      <div className="ct-auth-theme-corner">
-        <ThemeToggle variant="compact" />
-      </div>
-      <Panel className="ct-auth-card">
-        <div className="ct-panel-body">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-            <div className="ct-brand-mark">CT</div>
-            <div>
-              <div style={{ fontFamily: 'var(--ct-font-display)', fontWeight: 700 }}>CoachTek</div>
-              <div style={{ fontSize: 12, color: 'var(--ct-text-muted)' }}>Solo coach sign in</div>
-            </div>
-          </div>
-          <p style={{ color: 'var(--ct-text-muted)', marginBottom: 24, fontSize: 14 }}>
-            Demo: alex@coachtek.app / coach123
-          </p>
-          <form
-            onSubmit={handleSubmit(async (values) => {
-              try {
-                await login(values);
-                navigate('/solo-coach/dashboard');
-              } catch (e) {
-                setError('root', { message: e instanceof Error ? e.message : 'Login failed' });
-              }
-            })}
-            style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
-          >
-            <div className="ct-field">
-              <label htmlFor="email">Email</label>
-              <input id="email" type="email" {...register('email')} />
-              {errors.email ? <span className="ct-field-error">{errors.email.message}</span> : null}
-            </div>
-            <div className="ct-field">
-              <label htmlFor="password">Password</label>
-              <input id="password" type="password" {...register('password')} />
-              {errors.password ? <span className="ct-field-error">{errors.password.message}</span> : null}
-            </div>
-            {errors.root ? <span className="ct-field-error">{errors.root.message}</span> : null}
-            <button className="ct-btn-primary ct-btn-primary-lg ct-press" type="submit" disabled={isSubmitting} style={{ width: '100%' }}>
-              {isSubmitting ? 'Signing in…' : 'Sign in'}
-            </button>
-          </form>
-          <p style={{ marginTop: 12, fontSize: 14 }}>
-            <Link to="/solo-coach/forgot-password" style={{ color: 'var(--ct-accent)', fontWeight: 600 }}>
-              Forgot password?
-            </Link>
-          </p>
-          <p style={{ marginTop: 20, color: 'var(--ct-text-muted)', fontSize: 14 }}>
-            New coach? <Link to="/solo-coach/register" style={{ color: 'var(--ct-accent)', fontWeight: 600 }}>Create account</Link>
-          </p>
+    <AuthShell
+      heroTitle={<>Your coaching ecosystem, <span className="neon">simplified.</span></>}
+      heroSubtitle="Manage clients, programs, subscriptions, and performance tracking — all from one powerful platform built for fitness professionals."
+      footerText="Don't have an account?"
+      footerLinkText="Click here to get started"
+      footerLinkTo="/register"
+    >
+      <h2>Welcome Back</h2>
+
+      <p style={{ color: 'var(--ct-text-muted)', marginBottom: 24, fontSize: 13 }}>
+        Demo: alex@coachtek.app / coach123
+      </p>
+
+      <form
+        onSubmit={handleSubmit(async (values) => {
+          try {
+            await login(values);
+            navigate('/solo-coach/dashboard');
+          } catch (e) {
+            setError('root', { message: e instanceof Error ? e.message : 'Login failed' });
+          }
+        })}
+        style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+      >
+        <div className="ct-field">
+          <label htmlFor="email">Email address</label>
+          <input id="email" type="email" placeholder="coach@coachtek.app" {...register('email')} />
+          {errors.email && <span className="ct-field-error">{errors.email.message}</span>}
         </div>
-      </Panel>
-    </div>
+        <div className="ct-field">
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" {...register('password')} />
+          {errors.password && <span className="ct-field-error">{errors.password.message}</span>}
+        </div>
+
+        <div className="ct-auth-row">
+          <label>
+            <input type="checkbox" /> Remember me
+          </label>
+          <Link to="/solo-coach/forgot-password">Forgot password?</Link>
+        </div>
+
+        {errors.root && <span className="ct-field-error">{errors.root.message}</span>}
+
+        <button className="ct-auth-cta ct-press" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Signing in…' : 'Start session'}
+        </button>
+      </form>
+    </AuthShell>
   );
 }

@@ -39,6 +39,10 @@ export function SplashPage() {
               </Link>
             ))}
           </div>
+          <p style={{ marginTop: 24, fontSize: 14, color: 'var(--ct-text-muted)', textAlign: 'center' }}>
+            Don't have an account?{' '}
+            <Link to="/register" style={{ color: 'var(--ct-accent)', fontWeight: 600 }}>Create account</Link>
+          </p>
         </div>
       </Panel>
     </div>

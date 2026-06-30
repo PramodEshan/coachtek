@@ -33,7 +33,7 @@ export interface RoleConsoleConfig {
 export const CLIENT_CONSOLE: RoleConsoleConfig = {
   role: 'client',
   brandSubtitle: 'Client app',
-  loginPath: '/client/login',
+  loginPath: '/login',
   dashboardPath: '/client/dashboard',
   profilePath: '/client/settings',
   loadingKey: 'client-main',
@@ -72,7 +72,7 @@ export const CLIENT_CONSOLE: RoleConsoleConfig = {
 export const OPERATOR_CONSOLE: RoleConsoleConfig = {
   role: 'operator',
   brandSubtitle: 'Platform operator',
-  loginPath: '/operator/login',
+  loginPath: '/login',
   dashboardPath: '/operator/dashboard',
   loadingKey: 'operator-main',
   navSections: [
@@ -111,7 +111,7 @@ export const OPERATOR_CONSOLE: RoleConsoleConfig = {
 export const GYM_ADMIN_CONSOLE: RoleConsoleConfig = {
   role: 'gym_admin',
   brandSubtitle: 'Gym admin',
-  loginPath: '/gym/admin/login',
+  loginPath: '/login',
   dashboardPath: '/gym/admin/dashboard',
   loadingKey: 'gym-admin-main',
   immersivePathPatterns: [/\/programs\/(new|[^/]+\/edit)$/],
@@ -155,7 +155,7 @@ export const GYM_ADMIN_CONSOLE: RoleConsoleConfig = {
 export const GYM_STAFF_CONSOLE: RoleConsoleConfig = {
   role: 'gym_staff',
   brandSubtitle: 'Gym staff',
-  loginPath: '/gym/staff/login',
+  loginPath: '/login',
   dashboardPath: '/gym/staff/today',
   loadingKey: 'gym-staff-main',
   navSections: [
@@ -185,7 +185,7 @@ export const GYM_STAFF_CONSOLE: RoleConsoleConfig = {
 export const SUPERADMIN_CONSOLE: RoleConsoleConfig = {
   role: 'superadmin',
   brandSubtitle: 'Super admin',
-  loginPath: '/superadmin/login',
+  loginPath: '/login',
   dashboardPath: '/superadmin/dashboard',
   loadingKey: 'superadmin-main',
   navSections: [

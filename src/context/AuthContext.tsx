@@ -6,7 +6,7 @@ import type { CoachUser, LoginInput, RegisterInput, RoleKey } from '@/services/t
 interface AuthContextValue {
   user: CoachUser | null;
   loading: boolean;
-  login: (input: LoginInput) => Promise<void>;
+  login: (input: LoginInput) => Promise<AuthSession>;
   loginAsRole: (role: RoleKey, input: LoginInput) => Promise<void>;
   switchToRole: (role: RoleKey) => Promise<void>;
   register: (input: RegisterInput) => Promise<{ pending: true }>;
@@ -33,6 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const session: AuthSession = await authService.login(input);
         writeSession(session);
         setUser(session.user);
+        return session;
       },
       async loginAsRole(role, input) {
         const session = await authService.loginAsRole(role, input);
