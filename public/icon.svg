@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="CoachTek">
+  <rect width="512" height="512" rx="112" fill="#b5d858"/>
+  <path
+    fill="#ffffff"
+    d="M148 156h84c62 0 98 32 98 86 0 54-36 90-98 90h-84V156zm72 142c34 0 52-18 52-56s-18-56-52-56h-24v112h24zM292 156h72v212h-72V156z"
+  />
+</svg>

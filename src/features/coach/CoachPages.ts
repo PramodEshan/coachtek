@@ -1,0 +1,15 @@
+export { CoachDashboardPage } from '@/features/coach/dashboard/CoachDashboardPage';
+export { CoachTodayPage } from '@/features/coach/today/CoachTodayPage';
+export { CoachCalendarPage } from '@/features/coach/calendar/CoachCalendarPage';
+export { CoachClientsPage } from '@/features/coach/clients/CoachClientsPage';
+export { CoachClientDetailPage } from '@/features/coach/clients/CoachClientDetailPage';
+export { CoachCheckInDetailPage, CoachSessionDetailPage } from '@/features/coach/clients/CoachSessionDetailPage';
+export { CoachMessagesPage } from '@/features/coach/messages/CoachMessagesPage';
+export { CoachProgramsPage } from '@/features/coach/programs/CoachProgramsPage';
+export { ProgramBuilderPage } from '@/features/coach/programs/ProgramBuilderPage';
+export { CoachPayoutsPage } from '@/features/coach/payouts/CoachPayoutsPage';
+export { CoachInvitesPage } from '@/features/coach/invites/CoachInvitesPage';
+export { CoachProfilePage } from '@/features/coach/profile/CoachProfilePage';
+export { CoachHelpPage } from '@/features/coach/help/CoachHelpPage';
+export { CoachFeedbackPage } from '@/features/coach/feedback/CoachFeedbackPage';
+export { GymCoachPayrollPage } from '@/features/gym/coach/GymCoachPayrollPage';

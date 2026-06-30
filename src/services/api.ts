@@ -1,0 +1,12 @@
+export { authService, readSession, writeSession } from '@/services/mock/auth';
+export type { AuthSession } from '@/services/mock/auth';
+export { clientsService } from '@/services/mock/clients';
+export { calendarService } from '@/services/mock/calendar';
+export { programsService } from '@/services/mock/programs';
+export { messagesService } from '@/services/mock/messages';
+export { feedbackService } from '@/services/mock/feedback';
+export { coachService } from '@/services/mock/coach';
+export { clientService } from '@/services/mock/client';
+export { operatorService, superadminService } from '@/services/mock/operator';
+export { gymService } from '@/services/mock/gym';
+export { gymCoachService } from '@/services/mock/gymCoach';
