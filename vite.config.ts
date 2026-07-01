@@ -37,6 +37,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        globIgnores: ['**/backgrounds/**'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/api\//],
         cleanupOutdatedCaches: true,
@@ -61,6 +62,7 @@ export default defineConfig({
   ],
   resolve: { alias: { '@': path.resolve(__dirname, './src') } },
   build: {
+    target: 'es2022',
     rollupOptions: {
       output: {
         manualChunks: {
