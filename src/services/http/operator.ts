@@ -6,16 +6,18 @@ import type {
   OperatorComplaint,
   OperatorDashboardSummary,
   OperatorFinancialOverview,
+  OperatorPlatformStats,
   PendingCoach,
   SubscriptionTier,
   SuperAdminDashboardSummary,
+  SuperAdminPlatformStats,
   TenantStatus,
   VettingStatus,
 } from '@/services/types';
 
 export const operatorService = {
-  async stats() {
-    return get('/platform/stats');
+  async stats(): Promise<OperatorPlatformStats> {
+    return get<OperatorPlatformStats>('/platform/stats');
   },
 
   async dashboardSummary(): Promise<OperatorDashboardSummary> {
@@ -131,8 +133,8 @@ export const operatorService = {
 };
 
 export const superadminService = {
-  async stats() {
-    return get('/platform/superadmin/stats');
+  async stats(): Promise<SuperAdminPlatformStats> {
+    return get<SuperAdminPlatformStats>('/platform/superadmin/stats');
   },
 
   async dashboardSummary(): Promise<SuperAdminDashboardSummary> {

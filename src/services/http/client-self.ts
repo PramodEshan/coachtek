@@ -6,6 +6,7 @@ import type {
   ClientProgressSummary,
   ClientWorkout,
   CompleteWorkoutInput,
+  ProgressPhoto,
   SessionCompletionLog,
 } from '@/services/types';
 
@@ -62,12 +63,12 @@ export const clientService = {
     return post<BodyMetricEntry[]>('/client/body-metrics', entry);
   },
 
-  async progressPhotos() {
-    return get('/client/progress-photos');
+  async progressPhotos(): Promise<ProgressPhoto[]> {
+    return get<ProgressPhoto[]>('/client/progress-photos');
   },
 
-  async uploadProgressPhoto(dataUrl: string, note?: string) {
-    return post('/client/progress-photos', { dataUrl, note });
+  async uploadProgressPhoto(dataUrl: string, note?: string): Promise<ProgressPhoto> {
+    return post<ProgressPhoto>('/client/progress-photos', { dataUrl, note });
   },
 
   async submitFeedback(input: {

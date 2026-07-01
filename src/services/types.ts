@@ -433,6 +433,30 @@ export interface DashboardTrendPoint {
   value: number;
 }
 
+export interface GymCoachListItem {
+  id: string;
+  name: string;
+  clients: number;
+  status: string;
+}
+
+export interface OperatorPlatformStats {
+  activeSoloCoaches: number;
+  pendingSoloCoaches: number;
+  registeredGyms: number;
+  pendingGyms: number;
+  activeClients: number;
+  openComplaints: number;
+  newRegistrations7d: number;
+}
+
+export interface SuperAdminPlatformStats {
+  escalatedComplaints: number;
+  operators: number;
+  gyms: number;
+  tierChanges30d: number;
+}
+
 export interface GymStaffDashboardSummary {
   gymName: string;
   attendedToday: number;

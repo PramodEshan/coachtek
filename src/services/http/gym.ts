@@ -2,12 +2,16 @@ import { get, post, patch } from './client';
 import type {
   Client,
   ClientPaymentRecord,
+  GymAdminDashboardSummary,
+  GymCoachListItem,
   GymCoachPayout,
   GymCoachProfile,
+  GymStaffDashboardSummary,
   GymStaffMember,
   GymSummary,
   Program,
   ProgramCreateInput,
+  TodaySession,
 } from '@/services/types';
 
 export const gymService = {
@@ -15,16 +19,16 @@ export const gymService = {
     return get<GymSummary>('/gym/summary');
   },
 
-  async coaches() {
-    return get('/gym/coaches');
+  async coaches(): Promise<GymCoachListItem[]> {
+    return get<GymCoachListItem[]>('/gym/coaches');
   },
 
   async clients(): Promise<Client[]> {
     return get<Client[]>('/gym/clients');
   },
 
-  async todaySessions() {
-    return get('/gym/today-sessions');
+  async todaySessions(): Promise<TodaySession[]> {
+    return get<TodaySession[]>('/gym/today-sessions');
   },
 
   async staff(): Promise<GymStaffMember[]> {
@@ -79,11 +83,11 @@ export const gymService = {
     return patch<Program>(`/gym/programs/${id}`, patchData);
   },
 
-  async staffDashboard() {
-    return get('/gym/dashboard/staff');
+  async staffDashboard(): Promise<GymStaffDashboardSummary> {
+    return get<GymStaffDashboardSummary>('/gym/dashboard/staff');
   },
 
-  async adminDashboard() {
-    return get('/gym/dashboard/admin');
+  async adminDashboard(): Promise<GymAdminDashboardSummary> {
+    return get<GymAdminDashboardSummary>('/gym/dashboard/admin');
   },
 };

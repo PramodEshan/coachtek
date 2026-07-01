@@ -4,7 +4,7 @@ import { Panel } from '@/components/ui';
 import { ClientProgressWidget } from '@/features/client/dashboard/ClientProgressWidget';
 import { useRolePageLoading } from '@/context/PageLoadingContext';
 import { clientService } from '@/services/api';
-import type { BodyMetricEntry, ClientProgressSummary, SessionCompletionLog } from '@/services/types';
+import type { BodyMetricEntry, ClientProgressSummary, ProgressPhoto, SessionCompletionLog } from '@/services/types';
 import { sessionFeelingEmoji, sessionFeelingLabel } from '@/utils/clientUi';
 
 export function ClientProgressPage() {
@@ -151,7 +151,7 @@ export function ClientProgressMetricsPage() {
 }
 
 export function ClientProgressPhotosPage() {
-  const [photos, setPhotos] = useState<Awaited<ReturnType<typeof clientService.progressPhotos>>>([]);
+  const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
   const [uploading, setUploading] = useState(false);
 
   useRolePageLoading('client-main');

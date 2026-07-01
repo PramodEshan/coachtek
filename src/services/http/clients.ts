@@ -5,6 +5,7 @@ import type {
   Client,
   ClientFilter,
   ClientPaymentRecord,
+  SessionCompletionLog,
   SessionHistoryItem,
   ArchiveReason,
 } from '@/services/types';
@@ -42,16 +43,20 @@ export const clientsService = {
     return patch<SessionHistoryItem>(`/clients/sessions/${sessionId}/note`, { note });
   },
 
-  async clientSessionLogs(clientId: string) {
-    return get(`/clients/${clientId}/session-logs`);
+  async clientSessionLogs(clientId: string): Promise<SessionCompletionLog[]> {
+    return get<SessionCompletionLog[]>(`/clients/${clientId}/session-logs`);
   },
 
-  async getSessionLog(sessionId: string) {
-    return get(`/clients/session-logs/${sessionId}`);
+  async getSessionLog(sessionId: string): Promise<SessionCompletionLog | null> {
+    try {
+      return await get<SessionCompletionLog>(`/clients/session-logs/${sessionId}`);
+    } catch {
+      return null;
+    }
   },
 
-  async updateSessionLogCoachNote(sessionId: string, coachNote: string) {
-    return patch(`/clients/session-logs/${sessionId}/coach-note`, { coachNote });
+  async updateSessionLogCoachNote(sessionId: string, coachNote: string): Promise<SessionCompletionLog> {
+    return patch<SessionCompletionLog>(`/clients/session-logs/${sessionId}/coach-note`, { coachNote });
   },
 
   async paymentHistory(clientId: string): Promise<ClientPaymentRecord[]> {
@@ -63,6 +68,6 @@ export const clientsService = {
   },
 
   async payeeLabels(): Promise<Record<string, { payeeName: string; feeLabel: string }>> {
-    return get(`/clients/payee-labels`);
+    return get<Record<string, { payeeName: string; feeLabel: string }>>(`/clients/payee-labels`);
   },
 };

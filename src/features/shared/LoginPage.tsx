@@ -29,7 +29,7 @@ export function LoginPage() {
   return (
     <AuthShell
       heroTitle={<>Your coaching ecosystem, <span className="neon">simplified.</span></>}
-      heroSubtitle="Manage clients, programs, subscriptions, and performance tracking — all from one powerful platform built for fitness professionals."
+      heroSubtitle="Manage clients, programs, subscriptions, and performance tracking - all from one powerful platform built for fitness professionals."
       footerText="Don't have an account?"
       footerLinkText="Click here to get started"
       footerLinkTo="/register"
